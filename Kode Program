@@ -1,0 +1,37 @@
+#Kode mengakses GPU sistem untuk mempercepat pelatihan
+!nvidia-smi
+
+#Kode instalasi package Ultralytics yang diperlukan
+!pip install ultralytics
+
+#Kode
+!pip install roboflow
+
+from roboflow import Roboflow
+rf = Roboflow(api_key="030f5Tof1l0xZs56GRgD")
+project = rf.workspace("ta-ntme6").project("project-daun-teh")
+version = project.version(1)
+dataset = version.download("yolov8")
+
+from ultralytics import YOLO
+model = YOLO("yolov8m")  # load pre trained model
+
+results = model.train(data="/content/project-daun-teh-1/data.yaml", epochs=50, batch=16)
+
+from ultralytics import YOLO
+
+# Load the trained model
+model = YOLO("/content/runs/detect/train/weights/best.pt")
+results = model.val(split='val')
+
+# Load the trained model
+model = YOLO("/content/runs/detect/train/weights/best.pt")
+results = model.val(split='test')
+
+# Load the trained model
+model = YOLO("/content/runs/detect/train/weights/best.pt")
+results = model.val(split='val', conf=0.7, iou=0,7)
+
+# Load the trained model
+model = YOLO("/content/runs/detect/train/weights/best.pt")
+results = model.val(split='test', conf=0.7, iou=0,7)
