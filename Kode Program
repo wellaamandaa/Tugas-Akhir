@@ -4,7 +4,7 @@
 # Baris kode instalasi package Ultralytics 
 !pip install ultralytics
 
-# Baris kode instalasi Roboflow dan akses dataset 
+# Baris kode instalasi Roboflow dan akses dataset
 !pip install roboflow
 from roboflow import Roboflow
 rf = Roboflow(api_key="030f5Tof1l0xZs56GRgD")
